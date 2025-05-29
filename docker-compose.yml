@@ -1,0 +1,32 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: ferreteria_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: emanuel
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: Ferreteria_Emanuel
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d
+    ports:
+      - "5433:5432"
+    networks:
+      - ferreteria_net
+
+  adminer:
+    image: adminer:latest
+    container_name: ferreteria_adminer
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    networks:
+      - ferreteria_net
+
+volumes:
+  postgres_data:
+
+networks:
+  ferreteria_net:
+    driver: bridge
