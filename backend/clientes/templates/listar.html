@@ -1,0 +1,18 @@
+{% if productos %}
+  {% for producto in productos %}
+    <tr>
+      <td>{{ producto.id }}</td>
+      <td>{{ producto.nombre }}</td>
+      <td>{{ producto.precio }}</td>
+      <td>{{ producto.categoria.nombre }}</td>
+      <td>
+        <a href="{% url 'editar_productos' producto.id %}" class="btn btn-warning btn-sm">✏️ Editar</a>
+        <a href="{% url 'eliminar_productos' producto.id %}" class="btn btn-danger btn-sm">🗑️ Eliminar</a>
+      </td>
+    </tr>
+  {% endfor %}
+{% elif proveedores %}
+  {# tabla para proveedores #}
+{% elif facturas %}
+  {# tabla para facturas #}
+{% endif %}
